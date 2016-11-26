@@ -86,6 +86,7 @@
     <splash src="res/screens/android/screen-ldpi-portrait.png" density="port-ldpi" />
     <splash src="res/screens/android/screen-mdpi-portrait.png" density="port-mdpi" />
     <splash src="res/screens/android/screen-xhdpi-portrait.png" density="port-xhdpi" />
+    
   </platform>
   <platform name="ios">
     <splash src="res/screens/ios/screen-iphone-portrait.png" width="320" height="480" />
@@ -109,4 +110,5 @@
   </platform>
   <plugin name="cordova-plugin-inappbrowser" version="1.2.1" />
   <plugin name="cordova-plugin-camera" version="2.1.1" />
+
 </widget>
