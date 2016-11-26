@@ -1,6 +1,10 @@
 ﻿<ion-view title="SwipSwap" ng-init="init()">
     <ion-content>
-        <div class="list">
+        <div class="Spinner">
+            <img id="mySpinner" src="images/Swaip_logo.svg" ng-show="loading" />
+            <img class="SpinnerLoad" id="spinner" src="images/balls.svg" ng-show="loading" />
+        </div>
+        <div ng-show="!loading" class="list">
             <label class="item item-input item-select">
                 <div class="input-label">
                     &nbsp;
@@ -11,14 +15,14 @@
             </label>
         </div>
         <br />
-            <div class="list card">
+            <div ng-show="!loading" class="list card">
                 <div id="{{chosenItem.ItemId}}">
                     <img ng-src="data:image/jpeg;base64,{{chosenItem.PictureData}}" height="200" width="200" />
                     <br />
                     <div class="col-sm-4">
-                        <button ng-click="DeclineItem(chosenItem.ItemId)" class="button button-block button-balanced">NO</button>
-                        <button ng-click="SuperLikeItem(chosenItem.ItemId)" class="button button-block button-balanced">DEAL</button>
-                        <button ng-click="LikeItem(chosenItem.ItemId)" class="button button-block button-balanced">YES</button>
+                        <img ng-click="DeclineItem(chosenItem.ItemId)" src="images/Buttones-16.svg"/>
+                        <img ng-click="SuperLikeItem(chosenItem.ItemId)" src="images/Buttones-17.svg"/>
+                        <img ng-click="LikeItem(chosenItem.ItemId)" src="images/Buttones-18.svg"/>
                     </div>
                 </div>
             </div>

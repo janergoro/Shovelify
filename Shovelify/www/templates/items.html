@@ -1,8 +1,8 @@
 ﻿<ion-view title="Item" ng-init="init()">
     <ion-content>
-        <div class="Spinner">
-            <img id="mySpinner" src="images/Swaip_logo.svg" ng-show="loading" />
-            <span us-spinner="{radius:30, width:8, length: 16}"></span>
+        <div class="Spinner" >
+            <img id="mySpinner" src="images/Swaip_logo.svg"ng-show="loading"/>
+            <img id="spinner" class="SpinnerLoad" src="images/balls.svg" ng-show="loading"/>
         </div>
         <div ng-show="!loading" class="list card">
             <div class="item item-avatar" ng-repeat="x in myItems" ng-click="openItem(x.ItemId)">
