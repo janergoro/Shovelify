@@ -1,13 +1,21 @@
-﻿<ion-view title="Item" ng-init="init()">
+﻿<ion-view title="Items" ng-init="init()">
     <ion-content>
+        <div>
+                <img style="display:inline-block;" ng-src="data:image/jpeg;base64,{{data.PictureData}}" height="100" width="100" />
+            <span>
+                <label style="display:inline-block;">{{data.Description}}</label>
+            </span>
+        </div>
+        <div>
+            <label>MATCHES: {{data.Matches.length}}</label>
+        </div>
         <div class="list card">
-            <div class="item item-avatar" ng-repeat="x in myItems" ng-click="openItem(x.ItemId)">
+            <div class="item item-avatar" ng-repeat="x in data.Matches">
                 <span><img ng-src="data:image/jpeg;base64,{{x.PictureData}}" height="100" width="100" /></span>
                 <span>{{x.Description}}</span>
-                <span>{{x.MatchCount}}</span>
+                <span><img src="https://maxcdn.icons8.com/Share/icon/Editing//delete1600.png" ng-click="delete(x.ItemId)" /></span>
             </div>
         </div>
-        <i style="font-size:40px;" ng-click="newItem();" class="icon icon ion-plus"></i>
     </ion-content>
     <div class="tabs tabs-icon-only">
         <a nav-clear class="tab-item disable-user-behavior active" title="Items" ui-sref="items">

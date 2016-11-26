@@ -30,17 +30,12 @@ OneMeal.config(function ($stateProvider, $urlRouterProvider) {
             url: '/swipe',
             templateUrl: 'templates/swipe.html',
             controller: 'SwipeController'
+        })
+        .state('item', {
+            url: '/item/:itemID',
+            templateUrl: 'templates/item.html',
+            controller: 'ItemController'
         });
-        //.state('history', {
-        //    url: '/history',
-        //    templateUrl: 'templates/history.html',
-        //    controller: 'MyHistoryController'
-        //})
-        //.state('profile', {
-        //    url: '/profile/:UserID/:MealID/:ProfileState',
-        //    templateUrl: 'templates/profile.html',
-        //    controller: 'ProfileController'
-        //});
     $urlRouterProvider.otherwise('/login');
 });
 
@@ -107,11 +102,6 @@ OneMeal.controller("ProductController", function ($scope, $cordovaOauth, $localS
 
     if (!$localStorage.hasOwnProperty("accessToken") || !$localStorage.hasOwnProperty("userId"))
         $location.path("/index");
-    cordova.plugins.diagnostic.requestCameraAuthorization(function (status) {
-        console.log("Authorization request for camera use was " + (status == cordova.plugins.diagnostic.permissionStatus.GRANTED ? "granted" : "denied"));
-    }, function (error) {
-        console.error(error);
-    });
     $scope.addImage = function () {
         navigator.camera.getPicture(onSuccess, onFail, {
             quality: 20,
@@ -138,7 +128,6 @@ OneMeal.controller("ItemsController", function ($scope, $cordovaOauth, $localSto
             $scope.newItem = function () {
                 $location.path("/product");
             };
-            alert($localStorage.userId);
             $http.get(serverSideUrl + "api/items/myitems/" + $localStorage.userId).then(function (response) {
                 $scope.myItems = response.data;
             });
@@ -152,23 +141,74 @@ OneMeal.controller("ItemsController", function ($scope, $cordovaOauth, $localSto
     if (!$localStorage.hasOwnProperty("accessToken") || !$localStorage.hasOwnProperty("userId"))
         $location.path("/index");
     $scope.openItem = function (id) {
+        $location.path("/item/"+id);
+    };
+
+});
+OneMeal.controller("ItemController", function ($scope, $http, $localStorage, $location, $stateParams) {
+    $scope.delete = function (id) {
         alert(id);
+    };
+    $scope.init = function () {    
+        if ($localStorage.hasOwnProperty("accessToken") === true) {
+            $http.get(serverSideUrl + "api/items/Get/" + $stateParams.itemID) 
+                .then(function (response) { $scope.data = response.data; });   
+        } else {
+            alert("Not signed in");
+            $location.path("/login");
+        }
     };
 
 });
 OneMeal.controller("SwipeController", function ($scope, $cordovaOauth, $localStorage, $location, $http) {
     $scope.i = 0;
+    $scope.my = { ItemId: 0 }
+    $scope.updated = function () {
+        alert($scope.my.ItemId);
+    }
     $scope.init = function () {
         if (true) {
             $http.get(serverSideUrl + "api/items/myitems/" + $localStorage.userId).then(function (response) {
+                $scope.myItems = response.data;
+            });
+            $http.get(serverSideUrl + "api/items/ItemsToLike/" + $localStorage.userId).then(function (response) {
                 $scope.Items = response.data;
                 $scope.chosenItem = $scope.Items[$scope.i];
             });
-            $scope.nextItem = function (id) {
+            $scope.DeclineItem = function (id) {
+                $scope.i += 1;
+                $scope.chosenItem = $scope.Items[$scope.i];
+                alert($scope.my.ItemId);
+                var data = {
+                    MyItemId: $scope.my.ItemId,
+                    LikedItemId: id,
+                    Decision: false        
+                };
+                $http.post(serverSideUrl + 'api/Likes', data).
+                    then(function (response) {
+                        console.log("sent decline data")
+                    });
                 $scope.i += 1;
                 $scope.chosenItem = $scope.Items[$scope.i];
             };
-
+            $scope.SuperLikeItem = function (id) {
+                $scope.i += 1;
+                $scope.chosenItem = $scope.Items[$scope.i];
+                $location.path("/superlike");
+            };
+            $scope.LikeItem = function (id) {
+                var data = {
+                    MyItemId: $scope.selectedItemId,
+                    LikedItemId: id,
+                    Decision: true
+                };
+                $http.post(serverSideUrl + 'api/Likes', data).
+                    then(function (response) {
+                        console.log("sent decline data")
+                    });
+                $scope.i += 1;
+                $scope.chosenItem = $scope.Items[$scope.i];
+            };
         } else {
             alert("Not signed in");
             $location.path("/index");
@@ -177,7 +217,7 @@ OneMeal.controller("SwipeController", function ($scope, $cordovaOauth, $localSto
     if (!$localStorage.hasOwnProperty("accessToken") || !$localStorage.hasOwnProperty("userId"))
         $location.path("/index");
     $scope.openItem = function (id) {
-        alert(id);
+        $location.path("/item/"+id);
     };
     
 

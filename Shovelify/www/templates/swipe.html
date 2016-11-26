@@ -5,10 +5,8 @@
                 <div class="input-label">
                     &nbsp;
                 </div>
-                <select>
-                    <option selected>Default</option>
-                    <option>Green</option>
-                    <option>Red</option>
+                <select ng-model="my.ItemId">
+                    <option ng-repeat="x in myItems" value="{{x.ItemId}}">{{x.Description}}</option>
                 </select>
             </label>
         </div>
@@ -18,9 +16,9 @@
                     <img ng-src="data:image/jpeg;base64,{{chosenItem.PictureData}}" height="200" width="200" />
                     <br />
                     <div class="col-sm-4">
-                        <button ng-click="nextItem(chosenItem.ItemId)" class="button button-block button-balanced">NO</button>
-                        <button ng-click="nextItem(chosenItem.ItemId)" class="button button-block button-balanced">DEAL</button>
-                        <button ng-click="nextItem(chosenItem.ItemId)" class="button button-block button-balanced">YES</button>
+                        <button ng-click="DeclineItem(chosenItem.ItemId)" class="button button-block button-balanced">NO</button>
+                        <button ng-click="SuperLikeItem(chosenItem.ItemId)" class="button button-block button-balanced">DEAL</button>
+                        <button ng-click="LikeItem(chosenItem.ItemId)" class="button button-block button-balanced">YES</button>
                     </div>
                 </div>
             </div>
