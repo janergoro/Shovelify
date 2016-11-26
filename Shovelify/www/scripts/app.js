@@ -1,30 +1,6 @@
 var OneMeal = angular.module('starter', ['ionic', 'ngStorage', 'ngCordova'])
 var serverSideUrl = "http://swapswip.azurewebsites.net/";
 
-(function () {
-    angular.module('ngLoadingSpinner', ['angularSpinner'])
-    .directive('usSpinner', ['$http', '$rootScope', function ($http, $rootScope) {
-        return {
-            link: function (scope, elm, attrs) {
-                $rootScope.spinnerActive = false;
-                scope.isLoading = function () {
-                    return $http.pendingRequests.length > 0;
-                };
-
-                scope.$watch(scope.isLoading, function (loading) {
-                    $rootScope.spinnerActive = loading;
-                    if (loading) {
-                        elm.removeClass('ng-hide');
-                    } else {
-                        elm.addClass('ng-hide');
-                    }
-                });
-            }
-        };
-
-    }]);
-}).call(this);
-
 OneMeal.run(function ($ionicPlatform) {
     $ionicPlatform.ready(function() {
         if(window.StatusBar) {
@@ -64,7 +40,7 @@ OneMeal.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 OneMeal.controller("LoginController", function ($scope, $cordovaOauth, $localStorage, $location, $http) {
-    if ($localStorage.hasOwnProperty("accessToken") === false && $localStorage.hasOwnProperty("userId") === true)
+    if ($localStorage.hasOwnProperty("accessToken") && $localStorage.hasOwnProperty("userId"))
         $location.path("/product");
     $scope.login = function () {
         $cordovaOauth.facebook("248927015523725", ["public_profile", "email"]).then(function (result) {
@@ -223,6 +199,7 @@ OneMeal.controller("ItemController", function ($scope, $http, $localStorage, $lo
 
 });
 OneMeal.controller("SwipeController", function ($scope, $cordovaOauth, $localStorage, $location, $http) {
+    $scope.loading = true;
     $scope.i = 0;
     $scope.my = { ItemId: 0 }
     $scope.updated = function () {
@@ -236,6 +213,7 @@ OneMeal.controller("SwipeController", function ($scope, $cordovaOauth, $localSto
             $http.get(serverSideUrl + "api/items/ItemsToLike/" + $localStorage.userId).then(function (response) {
                 $scope.Items = response.data;
                 $scope.chosenItem = $scope.Items[$scope.i];
+                $scope.loading = false;
             });
             $scope.DeclineItem = function (id) {
                 $scope.i += 1;
@@ -246,6 +224,7 @@ OneMeal.controller("SwipeController", function ($scope, $cordovaOauth, $localSto
                     LikedItemId: id,
                     Decision: false        
                 };
+                $scope.loading = true;
                 $http.post(serverSideUrl + 'api/Likes', data).
                     then(function (response) {
                         console.log("sent decline data")
@@ -264,6 +243,7 @@ OneMeal.controller("SwipeController", function ($scope, $cordovaOauth, $localSto
                     LikedItemId: id,
                     Decision: true
                 };
+                $scope.loading = true;
                 $http.post(serverSideUrl + 'api/Likes', data).
                     then(function (response) {
                         console.log("sent decline data")
