@@ -108,4 +108,5 @@
     <splash src="res/screens/wp8/SplashScreenImage.png" width="768" height="1280" />
   </platform>
   <plugin name="cordova-plugin-inappbrowser" version="1.2.1" />
+  <plugin name="cordova-plugin-camera" version="2.1.1" />
 </widget>

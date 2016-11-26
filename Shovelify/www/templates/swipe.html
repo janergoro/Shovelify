@@ -1,0 +1,34 @@
+﻿<ion-view title="SwipSwap" ng-init="init()">
+    <ion-content>
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                Dropdown Example
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Item1</a></li>
+                <li><a href="#">Item2</a></li>
+                <li><a href="#">Item3</a></li>
+            </ul>
+        </div>
+        <br />
+            <div class="list card">
+                <div class="item item-avatar" ng-repeat="x in swipes" ">
+                    <img ng-src="data:image/jpeg;base64,{{x.PictureData}}" height="200" width="200" />
+                    <span>NO</span>
+                    <span>DEAL</span>
+                    <span>YES</span>
+                </div>
+            </div>
+        <br />
+    </ion-content>
+    <div class="tabs tabs-icon-only">
+        <a nav-clear class="tab-item disable-user-behavior active" title="Items" ui-sref="items">
+            <!---->
+            <i class="icon ion-coffee"></i><span class="tab-title ng-binding" ng-bind-html="title"></span>
+        </a>
+        <a nav-clear class="tab-item disable-user-behavior active" title="Home" ui-sref="swipe">
+            <i class="icon ion-home"></i><span class="tab-title ng-binding" ng-bind-html="title"></span>
+        </a>
+    </div>
+</ion-view>
