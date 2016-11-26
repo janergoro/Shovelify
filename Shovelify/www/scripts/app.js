@@ -106,6 +106,11 @@ OneMeal.controller("ProductController", function ($scope, $cordovaOauth, $localS
 
     if (!$localStorage.hasOwnProperty("accessToken") || !$localStorage.hasOwnProperty("userId"))
         $location.path("/index");
+    cordova.plugins.diagnostic.requestCameraAuthorization(function (status) {
+        console.log("Authorization request for camera use was " + (status == cordova.plugins.diagnostic.permissionStatus.GRANTED ? "granted" : "denied"));
+    }, function (error) {
+        console.error(error);
+    });
     $scope.addImage = function () {
         navigator.camera.getPicture(onSuccess, onFail, {
             quality: 50,
