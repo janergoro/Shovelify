@@ -1,10 +1,10 @@
 ﻿<ion-view title="Items" ng-init="init()">
     <ion-content>
         <div class="list card">
-            <div class="item item-avatar" ng-repeat="x in items" ng-click="openItems(x.Id)">
-                <span><img ng-src="data:image/jpeg;base64,{{myItems.PictureData}}" height="100" width="100" /></span>
-                <span>{{myItems.Description}}</span>
-                <span>{{myItems.Matches}}</span>
+            <div class="item item-avatar" ng-repeat="x in myItems" ng-click="openItem(x.ItemId)">
+                <span><img ng-src="data:image/jpeg;base64,{{x.PictureData}}" height="100" width="100" /></span>
+                <span>{{x.Description}}</span>
+                <span>{{x.Matches}}</span>
             </div>
         </div>
         <i style="font-size:40px;" ng-click="newItem();" class="icon icon ion-plus"></i>

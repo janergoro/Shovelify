@@ -90,11 +90,12 @@ OneMeal.controller("ProductController", function ($scope, $cordovaOauth, $localS
                     Description: $scope.my.Name,
                     Value: $scope.my.Type,
                     DealType: 0,
-                    PictureData:pictureData
+                    PictureData: pictureData,
+                    UserId: $localStorage.userId
                 };
                 $http.post(serverSideUrl + 'api/Items', data).
                     then(function (response) {
-                        $location.path("/product");
+                        $location.path("/items");
                     });
             }
 
@@ -113,13 +114,14 @@ OneMeal.controller("ProductController", function ($scope, $cordovaOauth, $localS
     });
     $scope.addImage = function () {
         navigator.camera.getPicture(onSuccess, onFail, {
-            quality: 50,
+            quality: 20,
             destinationType: Camera.DestinationType.DATA_URL
         });
     };
     
 
 });
+
 function onSuccess(imageData) {
     var image = document.getElementById('currentImage');
     image.src = "data:image/jpeg;base64," + imageData;
@@ -130,12 +132,14 @@ function onFail(message) {
 }
 
 OneMeal.controller("ItemsController", function ($scope, $cordovaOauth, $localStorage, $location, $http) {
+
     $scope.init = function () {
         if (true) {
             $scope.newItem = function () {
                 $location.path("/product");
             };
-            $http.get(serverSideUrl + "api/myitems/" + $localStorage.userId).then(function (response) {
+            alert($localStorage.userId);
+            $http.get(serverSideUrl + "api/items/myitems/" + $localStorage.userId).then(function (response) {
                 $scope.myItems = response.data;
             });
             
@@ -147,14 +151,34 @@ OneMeal.controller("ItemsController", function ($scope, $cordovaOauth, $localSto
     };
     if (!$localStorage.hasOwnProperty("accessToken") || !$localStorage.hasOwnProperty("userId"))
         $location.path("/index");
-    $scope.openItem(id) = function (id) {
+    $scope.openItem = function (id) {
         alert(id);
-    }
+    };
 
 });
 OneMeal.controller("SwipeController", function ($scope, $cordovaOauth, $localStorage, $location, $http) {
+    $scope.i = 0;
+    $scope.init = function () {
+        if (true) {
+            $http.get(serverSideUrl + "api/items/myitems/" + $localStorage.userId).then(function (response) {
+                $scope.Items = response.data;
+                $scope.chosenItem = $scope.Items[$scope.i];
+            });
+            $scope.nextItem = function (id) {
+                $scope.i += 1;
+                $scope.chosenItem = $scope.Items[$scope.i];
+            };
+
+        } else {
+            alert("Not signed in");
+            $location.path("/index");
+        }
+    };
     if (!$localStorage.hasOwnProperty("accessToken") || !$localStorage.hasOwnProperty("userId"))
         $location.path("/index");
+    $scope.openItem = function (id) {
+        alert(id);
+    };
     
 
 });

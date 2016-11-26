@@ -1,26 +1,35 @@
 ﻿<ion-view title="SwipSwap" ng-init="init()">
     <ion-content>
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                Dropdown Example
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Item1</a></li>
-                <li><a href="#">Item2</a></li>
-                <li><a href="#">Item3</a></li>
-            </ul>
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    &nbsp;
+                </div>
+                <select>
+                    <option selected>Default</option>
+                    <option>Green</option>
+                    <option>Red</option>
+                </select>
+            </label>
         </div>
         <br />
             <div class="list card">
-                <div class="item item-avatar" ng-repeat="x in swipes" ">
-                    <img ng-src="data:image/jpeg;base64,{{x.PictureData}}" height="200" width="200" />
-                    <span>NO</span>
-                    <span>DEAL</span>
-                    <span>YES</span>
+                <div id="{{chosenItem.ItemId}}">
+                    <img ng-src="data:image/jpeg;base64,{{chosenItem.PictureData}}" height="200" width="200" />
+                    <br />
+                    <div class="col-sm-4">
+                        <button ng-click="nextItem(chosenItem.ItemId)" class="button button-block button-balanced">NO</button>
+                        <button ng-click="nextItem(chosenItem.ItemId)" class="button button-block button-balanced">DEAL</button>
+                        <button ng-click="nextItem(chosenItem.ItemId)" class="button button-block button-balanced">YES</button>
+                    </div>
                 </div>
             </div>
         <br />
+        <!--<div class="col-sm-4">
+                <label class="radio-inline"> <input type="radio" name="season" ng-model="my.Type" id="first" value="1" >1 </label>
+                <label class="radio-inline"> <input type="radio" name="season" ng-model="my.Type" id="second" value="2">2 </label>
+                <label class="radio-inline"> <input type="radio" name="season" ng-model="my.Type" id="third" value="3">3</label>
+            </div>-->
     </ion-content>
     <div class="tabs tabs-icon-only">
         <a nav-clear class="tab-item disable-user-behavior active" title="Items" ui-sref="items">
@@ -28,7 +37,7 @@
             <i class="icon ion-coffee"></i><span class="tab-title ng-binding" ng-bind-html="title"></span>
         </a>
         <a nav-clear class="tab-item disable-user-behavior active" title="Home" ui-sref="swipe">
-            <i class="icon ion-home"></i><span class="tab-title ng-binding" ng-bind-html="title"></span>
+            <i class="icon ion-home"></i><span class="tab-title ng-binding" ng-bind-html="swipe"></span>
         </a>
     </div>
 </ion-view>
