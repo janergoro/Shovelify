@@ -1,13 +1,17 @@
 ﻿<ion-view title="Item" ng-init="init()">
     <ion-content>
-        <div class="list card">
+        <div class="Spinner" >
+            <img id="mySpinner" src="images/Swaip_logo.svg"ng-show="loading"/>
+            <span us-spinner="{radius:30, width:8, length: 16}"></span>
+        </div>
+        <div ng-show="!loading" class="list card">
             <div class="item item-avatar" ng-repeat="x in myItems" ng-click="openItem(x.ItemId)">
                 <span><img ng-src="data:image/jpeg;base64,{{x.PictureData}}" height="100" width="100" /></span>
                 <span>{{x.Description}}</span>
                 <span>{{x.MatchCount}}</span>
             </div>
         </div>
-        <i style="font-size:40px;" ng-click="newItem();" class="icon icon ion-plus"></i>
+        <i ng-show="!loading" style="font-size:40px;" ng-click="newItem();" class="icon icon ion-plus"></i>
     </ion-content>
     <div class="tabs tabs-icon-only">
         <a nav-clear class="tab-item disable-user-behavior active" title="Items" ui-sref="items">

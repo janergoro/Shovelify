@@ -1,6 +1,30 @@
 var OneMeal = angular.module('starter', ['ionic', 'ngStorage', 'ngCordova'])
 var serverSideUrl = "http://swapswip.azurewebsites.net/";
 
+(function () {
+    angular.module('ngLoadingSpinner', ['angularSpinner'])
+    .directive('usSpinner', ['$http', '$rootScope', function ($http, $rootScope) {
+        return {
+            link: function (scope, elm, attrs) {
+                $rootScope.spinnerActive = false;
+                scope.isLoading = function () {
+                    return $http.pendingRequests.length > 0;
+                };
+
+                scope.$watch(scope.isLoading, function (loading) {
+                    $rootScope.spinnerActive = loading;
+                    if (loading) {
+                        elm.removeClass('ng-hide');
+                    } else {
+                        elm.addClass('ng-hide');
+                    }
+                });
+            }
+        };
+
+    }]);
+}).call(this);
+
 OneMeal.run(function ($ionicPlatform) {
     $ionicPlatform.ready(function() {
         if(window.StatusBar) {
@@ -75,6 +99,43 @@ OneMeal.controller("LoginController", function ($scope, $cordovaOauth, $localSto
 });
 
 OneMeal.controller("ProductController", function ($scope, $cordovaOauth, $localStorage, $location, $http) {
+    $scope.first = true;
+    $scope.second = true;
+    $scope.third = true;
+    $scope.fourth = true;
+
+    $scope.toggleButton = function (number) {
+        switch (number) {
+            case (1):
+                $scope.first = !$scope.first
+                $scope.second = true
+                $scope.third = true
+                $scope.fourth = true
+                $scope.my.Type = 1
+                break;
+            case (2):
+                $scope.first = true
+                $scope.second = !$scope.second
+                $scope.third = true
+                $scope.fourth = true
+                $scope.my.Type = 2
+                break;
+            case (3):
+                $scope.first = true
+                $scope.second = true
+                $scope.third = !$scope.third
+                $scope.fourth = true
+                $scope.my.Type = 3
+                break;
+            case (4):
+                $scope.first = true
+                $scope.second = true
+                $scope.third = true
+                $scope.fourth = !$scope.fourth
+                $scope.my.Type = 4
+                break;
+        }
+    }
 
     $scope.init = function () {
         if (true) {
@@ -122,7 +183,7 @@ function onFail(message) {
 }
 
 OneMeal.controller("ItemsController", function ($scope, $cordovaOauth, $localStorage, $location, $http) {
-
+    $scope.loading = true;
     $scope.init = function () {
         if (true) {
             $scope.newItem = function () {
@@ -130,6 +191,7 @@ OneMeal.controller("ItemsController", function ($scope, $cordovaOauth, $localSto
             };
             $http.get(serverSideUrl + "api/items/myitems/" + $localStorage.userId).then(function (response) {
                 $scope.myItems = response.data;
+                $scope.loading = false;
             });
             
 

@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
         <br />
-            <div>
+            <div hidden="hidden">
                 <label class="radio-inline"> <input type="radio" name="season" ng-model="my.Type" id="first" value="1" >1 </label>
                 <label class="radio-inline"> <input type="radio" name="season" ng-model="my.Type" id="second" value="2">2 </label>
                 <label class="radio-inline"> <input type="radio" name="season" ng-model="my.Type" id="third" value="3">3</label>
@@ -27,16 +27,20 @@
                 <div class="col-xs-1  col-centered">                
                 </div>
                 <div class="col-xs-3  col-centered">                    
-                        <img src="images/Buttones-01.svg" alt="...">                   
+                        <img ng-show="first" src="images/Buttones-01.svg" ng-click="toggleButton(1)" alt="...">
+                        <img ng-show="!first" src="images/Buttones-08.svg" ng-click="toggleButton(1)" alt="...">                 
                 </div>
                 <div class="col-xs-3 col-centered">                   
-                        <img src="images/Buttones-02.svg" alt="...">                   
+                        <img ng-show="second" src="images/Buttones-02.svg" ng-click="toggleButton(2)" alt="...">
+                        <img ng-show="!second" src="images/Buttones-07.svg" ng-click="toggleButton(2)" alt="...">                         
                 </div>
                 <div class="col-xs-3  col-centered">                    
-                        <img src="images/Buttones-03.svg" alt="...">                    
+                        <img ng-show="third" src="images/Buttones-03.svg" ng-click="toggleButton(3)" alt="...">
+                        <img ng-show="!third" src="images/Buttones-06.svg" ng-click="toggleButton(3)" alt="...">                          
                 </div>
                 <div class="col-xs-3  col-centered">                    
-                        <img src="images/Buttones-04.svg" alt="...">                    
+                        <img ng-show="fourth" src="images/Buttones-04.svg" ng-click="toggleButton(4)" alt="...">
+                        <img ng-show="!fourth" src="images/Buttones-05.svg" ng-click="toggleButton(4)" alt="...">                     
                 </div>
             </div>
             <br />
