@@ -1,17 +1,33 @@
 ﻿<ion-view title="Item" ng-init="init()">
     <ion-content>
-        <div class="Spinner" >
-            <img id="mySpinner" src="images/Swaip_logo.svg"ng-show="loading"/>
+        <div class="Spinner">
+            <img id="mySpinner" src="images/Swaip_logo.svg" ng-show="loading" />
             <span us-spinner="{radius:30, width:8, length: 16}"></span>
         </div>
         <div ng-show="!loading" class="list card">
             <div class="item item-avatar" ng-repeat="x in myItems" ng-click="openItem(x.ItemId)">
-                <span><img ng-src="data:image/jpeg;base64,{{x.PictureData}}" height="100" width="100" /></span>
-                <span>{{x.Description}}</span>
-                <span>{{x.MatchCount}}</span>
+                <div class="row">
+                    <div class="col-xs-3  col-centered">
+                        <span><img ng-src="data:image/jpeg;base64,{{x.PictureData}}" height="100" width="100" /></span>
+                    </div>
+                    <div class="col-xs-3  col-centered">
+                        <span>{{x.Description}}</span>
+                    </div>
+                    <div class="col-xs-3  col-centered">
+                        <span>{{x.MatchCount}}</span>
+                    </div>
+                </div>
             </div>
+
+            <div style="float:none; margin-left: 40%; margin-right: 40%;">
+                <img src="images/Buttones-25.svg" ng-show="!loading" ng-click="newItem();" style="width: 100%; " alt="lisamine" />
+            </div>
+
+
+
         </div>
-        <i ng-show="!loading" style="font-size:40px;" ng-click="newItem();" class="icon icon ion-plus"></i>
+
+
     </ion-content>
     <div class="tabs tabs-icon-only">
         <a nav-clear class="tab-item disable-user-behavior active" title="Items" ui-sref="items">
