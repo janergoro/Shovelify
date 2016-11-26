@@ -3,42 +3,58 @@
     </ion-nav-buttons>
     <ion-content>
         <div>
-            <div >
-                <img style="left: 30%; margin-left: 30%; margin-top: 20%;" id="currentImage" ng-click="addImage()" src="http://wfarm3.dataknet.com/static/resources/icons/set112/69e0d01c.png" height="250" width="125"/>
+
+            <div class="container">              
+                <img style="margin-left: 40%; margin-top: 25%; margin-bottom: 25%;" id="currentImage" ng-click="addImage()" src="http://wfarm3.dataknet.com/static/resources/icons/set112/69e0d01c.png" height="65" width="65"/>
             </div>
             <div>
                 <label class="item item-input">
-                    <input type="text" ng-model="my.Name">
+                    <input type="text" placeholder="Item's name" ng-model="my.Name">
                 </label>
             </div>
         </div>
         <div class="form-group">
         <br />
-            <div class="col-sm-8">
+            <div>
                 <label class="radio-inline"> <input type="radio" name="season" ng-model="my.Type" id="first" value="1" >1 </label>
                 <label class="radio-inline"> <input type="radio" name="season" ng-model="my.Type" id="second" value="2">2 </label>
                 <label class="radio-inline"> <input type="radio" name="season" ng-model="my.Type" id="third" value="3">3</label>
                 <label class="radio-inline"> <input type="radio" name="season" ng-model="my.Type" id="fourth" value="4">4</label>
             </div>
+
+            <label>Item's price class</label>
+            <div class="row" >
+                <div class="col-xs-1  col-centered">                
+                </div>
+                <div class="col-xs-3  col-centered">                    
+                        <img src="images/Buttones-01.svg" alt="...">                   
+                </div>
+                <div class="col-xs-3 col-centered">                   
+                        <img src="images/Buttones-02.svg" alt="...">                   
+                </div>
+                <div class="col-xs-3  col-centered">                    
+                        <img src="images/Buttones-03.svg" alt="...">                    
+                </div>
+                <div class="col-xs-3  col-centered">                    
+                        <img src="images/Buttones-04.svg" alt="...">                    
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-4  col-centered">
+                </div>                
+                <div class="col-xs-6  col-centered">
+                    <img src="images/Buttones-19.svg" ng-click="Save()">
+                </div>
+                <div class="col-xs-3  col-centered">
+                </div>
+            </div>     
+          
+      
+            
         </div>
-        <!--<div class="tabs tabs-icon-only">
-            <a nav-clear class="tab-item disable-user-behavior active" title="Posting" ui-sref="post">
-                <i class="icon ion-android-attach"></i><span class="tab-title ng-binding" ng-bind-html="title"></span>
-            </a>
-            <a nav-clear class="tab-item disable-user-behavior active" title="Home" ui-sref="mainscreen">
-                <i class="icon ion-ios-pint"></i><span class="tab-title ng-binding" ng-bind-html="title"></span>
-            </a>
-            <a nav-clear class="tab-item disable-user-behavior active" title="History" ui-sref="history">
-                <i class="icon ion-hammer"></i><span class="tab-title ng-binding" ng-bind-html="title"></span>
-            </a>
-            <a nav-clear class="tab-item disable-user-behavior active" title="History" ui-sref="history">
-                <i class="icon ion-ios-monitor"></i><span class="tab-title ng-binding" ng-bind-html="title"></span>
-            </a>
-        </div>-->
-        <br />
-        <div>
-            <button style="margin-left: 40%;" type="button" ng-click="Save()" class="btn btn-default">Save</button>
-        </div>
-        <label id="imagedata" hidden="hidden">123</label>
+        
+     
+      <label id="imagedata" hidden="hidden">123</label>
     </ion-content>
 </ion-view>
