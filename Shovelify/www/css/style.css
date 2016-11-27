@@ -70,8 +70,19 @@ max-height: 100%;
     width: 100%;
 }
 .Spinner{
-    margin-top: 50%;
+    /*margin-top: 50%;*/
+}
+.SpinnerHidden
+{
+    margin-top: 0%;
 }
 .SpinnerLoad{
     margin-left: 30%;
+}
+.deviceButtons{
+    width: 80px;
+    height:80px;
+}
+itemView.{
+    margin-left:-30%;
 }

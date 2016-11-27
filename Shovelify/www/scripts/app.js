@@ -3,9 +3,9 @@ var serverSideUrl = "http://swapswip.azurewebsites.net/";
 
 OneMeal.run(function ($ionicPlatform) {
     $ionicPlatform.ready(function() {
-        if(window.StatusBar) {
-            StatusBar.styleDefault();
-        }
+        //if(window.StatusBar) {
+        //    StatusBar.styleDefault();
+        //}
     });
 });
 
@@ -115,7 +115,9 @@ OneMeal.controller("ProductController", function ($scope, $cordovaOauth, $localS
 
     $scope.init = function () {
         if (true) {
-            $scope.my = { Name: '', Type: ''}
+            $scope.my = { Name: '', Type: '' }
+            if ($localStorage.hasOwnProperty("myItems") && $localStorage.myItems > 0)
+                $location.path("/items");
             $scope.Save = function () {
                 var pictureData = document.getElementById("imagedata").innerHTML;
                 var data = {
@@ -163,10 +165,14 @@ OneMeal.controller("ItemsController", function ($scope, $cordovaOauth, $localSto
     $scope.init = function () {
         if (true) {
             $scope.newItem = function () {
+                if ($localStorage.hasOwnProperty("myItems") && $localStorage.myItems > 0)
+                    $localStorage.myItems = 0;
                 $location.path("/product");
             };
             $http.get(serverSideUrl + "api/items/myitems/" + $localStorage.userId).then(function (response) {
                 $scope.myItems = response.data;
+                if ($scope.myItems.length > 0)
+                    $localStorage.myItems = $scope.myItems.length;
                 $scope.loading = false;
             });
             
@@ -209,6 +215,7 @@ OneMeal.controller("SwipeController", function ($scope, $cordovaOauth, $localSto
         if (true) {
             $http.get(serverSideUrl + "api/items/myitems/" + $localStorage.userId).then(function (response) {
                 $scope.myItems = response.data;
+                $scope.loading = false;
             });
             $http.get(serverSideUrl + "api/items/ItemsToLike/" + $localStorage.userId).then(function (response) {
                 $scope.Items = response.data;
@@ -218,7 +225,6 @@ OneMeal.controller("SwipeController", function ($scope, $cordovaOauth, $localSto
             $scope.DeclineItem = function (id) {
                 $scope.i += 1;
                 $scope.chosenItem = $scope.Items[$scope.i];
-                alert($scope.my.ItemId);
                 var data = {
                     MyItemId: $scope.my.ItemId,
                     LikedItemId: id,

@@ -17,12 +17,12 @@
         <br />
             <div ng-show="!loading" class="list card">
                 <div id="{{chosenItem.ItemId}}">
-                    <img ng-src="data:image/jpeg;base64,{{chosenItem.PictureData}}" height="200" width="200" />
+                    <img ng-src="data:image/jpeg;base64,{{chosenItem.PictureData}}" style="margin-left: 15%;" height="200" width="200" />
                     <br />
                     <div class="col-sm-4">
-                        <img ng-click="DeclineItem(chosenItem.ItemId)" src="images/Buttones-16.svg"/>
-                        <img ng-click="SuperLikeItem(chosenItem.ItemId)" src="images/Buttones-17.svg"/>
-                        <img ng-click="LikeItem(chosenItem.ItemId)" src="images/Buttones-18.svg"/>
+                        <img  style="margin-left: 6%;" class="deviceButtons" ng-click="DeclineItem(chosenItem.ItemId)" src="images/Buttones-16.svg"/>
+                        <img class="deviceButtons" ng-click="SuperLikeItem(chosenItem.ItemId)" src="images/Buttones-17.svg"/>
+                        <img class="deviceButtons" ng-click="LikeItem(chosenItem.ItemId)" src="images/Buttones-18.svg"/>
                     </div>
                 </div>
             </div>
@@ -36,10 +36,10 @@
     <div class="tabs tabs-icon-only">
         <a nav-clear class="tab-item disable-user-behavior active" title="Items" ui-sref="items">
             <!---->
-            <i class="icon ion-coffee"></i><span class="tab-title ng-binding" ng-bind-html="title"></span>
+            <i class="icon ion-navicon"></i><span class="tab-title ng-binding" ng-bind-html="title"></span>
         </a>
         <a nav-clear class="tab-item disable-user-behavior active" title="Home" ui-sref="swipe">
-            <i class="icon ion-home"></i><span class="tab-title ng-binding" ng-bind-html="swipe"></span>
+            <i class="icon ion-arrow-swap"></i><span class="tab-title ng-binding" ng-bind-html="swipe"></span>
         </a>
     </div>
 </ion-view>

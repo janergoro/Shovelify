@@ -1,22 +1,20 @@
 ﻿<ion-view title="Item" ng-init="init()">
     <ion-content>
-        <div class="Spinner" >
-            <img id="mySpinner" src="images/Swaip_logo.svg"ng-show="loading"/>
-            <img id="spinner" class="SpinnerLoad" src="images/balls.svg" ng-show="loading"/>
+        <div class="Spinner" ng-show="loading">
+            <img id="mySpinner" src="images/Swaip_logo.svg"/>
+            <img id="spinner" class="SpinnerLoad" src="images/balls.svg"/>
         </div>
         <div ng-show="!loading" class="list card">
-            <div class="item item-avatar" ng-repeat="x in myItems" ng-click="openItem(x.ItemId)">
-                <div class="row">
+            <div class="item item-avatar row" ng-repeat="x in myItems" ng-click="openItem(x.ItemId)">
                     <div class="col-xs-3  col-centered">
-                        <span><img ng-src="data:image/jpeg;base64,{{x.PictureData}}" height="100" width="100" /></span>
+                        <img ng-src="data:image/jpeg;base64,{{x.PictureData}}" height="100" width="100" />
+                    </div>
+                    <div class="col-xs-3  col-centered" style="margin-left: 30%;">
+                        {{x.Description}}
                     </div>
                     <div class="col-xs-3  col-centered">
-                        <span>{{x.Description}}</span>
+                        {{x.MatchCount}}
                     </div>
-                    <div class="col-xs-3  col-centered">
-                        <span>{{x.MatchCount}}</span>
-                    </div>
-                </div>
             </div>
 
             <div style="float:none; margin-left: 40%; margin-right: 40%;">
@@ -32,10 +30,10 @@
     <div class="tabs tabs-icon-only">
         <a nav-clear class="tab-item disable-user-behavior active" title="Items" ui-sref="items">
             <!---->
-            <i class="icon ion-coffee"></i><span class="tab-title ng-binding" ng-bind-html="title"></span>
+            <i class="icon ion-navicon"></i><span class="tab-title ng-binding" ng-bind-html="title"></span>
         </a>
         <a nav-clear class="tab-item disable-user-behavior active" title="Home" ui-sref="swipe">
-            <i class="icon ion-home"></i><span class="tab-title ng-binding" ng-bind-html="title"></span>
+            <i class="icon ion-arrow-swap"></i><span class="tab-title ng-binding" ng-bind-html="swipe"></span>
         </a>
     </div>
 </ion-view>
